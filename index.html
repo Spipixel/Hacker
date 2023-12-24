@@ -41,27 +41,23 @@
                 alt="">
             <div class="root"
                 style="z-index: 2;top: 0; width: 100%;height: 100%;background-color: transparent;position: absolute;">
-                <div id="app-container"
-                    style=" display: flex; justify-content: space-between; flex-direction: column; background-color: rgba(48, 48, 48, 0.397); border-radius: 10px; z-index: 2; padding: 10px; position: absolute;height: 50%;top: calc(100% - 80%);">
+                <div id="app-container">
                     <div class="app disable-selection"
-                        style="margin-bottom: 10px; cursor: pointer; font-size: 0.8em; text-align: center;color: #ffffff;">
+                        >
                         <img src="img/icons8-mac-folder-48.png" alt="folder">
                         <div>Home</div>
                     </div>
-                    <div onclick="App_openOrClose('block', 'terminal-app')" class="app disable-selection"
-                        style="margin-bottom: 10px; cursor: pointer; font-size: 0.8em; text-align: center;color: #ffffff;">
+                    <div onclick="App_openOrClose('block', 'terminal-app')" class="app disable-selection" >
                         <img src="img/technology.png" style="border-radius: 3px; margin: 4px;" alt="folder">
                         <div>terminal</div>
                     </div>
-                    <div onclick="App_openOrClose('block', 'chrome-app')" class="app disable-selection"
-                        style="margin-bottom: 10px; cursor: pointer; font-size: 0.8em; text-align: center;color: #ffffff;">
-                        <img src="img/chrome.png" width="46px" alt="folder">
+                    <div onclick="App_openOrClose('block', 'chrome-app')" class="app disable-selection">
+                        <img src="img/chrome.png" alt="folder">
                         <div>Chrome</div>
                     </div>
 
-                    <div onclick="App_openOrClose('block', 'TextEditor-app')" class="app disable-selection"
-                        style="margin-bottom: 10px; cursor: pointer; font-size: 0.8em; text-align: center;color: #ffffff;">
-                        <img src="img/icons8-document-48.png" width="46px" alt="folder">
+                    <div onclick="App_openOrClose('block', 'TextEditor-app')" class="app disable-selection">
+                        <img src="img/icons8-document-48.png" alt="folder">
                         <div>Editor</div>
                     </div>
                 </div>

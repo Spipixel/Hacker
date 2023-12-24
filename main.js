@@ -490,6 +490,22 @@ async function setCacheHeadersForImages() {
     }
 }
 
+function rotateScreen() {
+    if (window.innerWidth < 900) {
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock('landscape-primary').catch(error => {
+                console.error('Could not rotate the screen:', error);
+            });
+        } else if (screen.lockOrientation) {
+            screen.lockOrientation('landscape-primary');
+        }
+    }
+}
+
+// Call the function initially and on window resize
+rotateScreen();
+window.addEventListener('resize', rotateScreen);
+
 
 // Call the function when the page loads
 window.onload = setCacheHeadersForImages;

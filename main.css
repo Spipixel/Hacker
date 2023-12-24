@@ -96,15 +96,62 @@
     width: 100%;
 }
 
+#app-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: rgba(48, 48, 48, 0.397);
+    border-radius: 10px;
+    z-index: 2;
+    padding: 10px;
+    position: absolute;
+    height: 50%;
+    top: calc(100% - 80%);
+    margin: 0 auto;
+}
+
+#app-container div {
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 0.8em;
+    text-align: center;
+    color: #ffffff;
+}
+
 .app {
     padding: 10px 5px;
     border-radius: 3px;
     transition: 0.1a ease-in-out;
 }
 
+.app img{
+    width: 46px;
+}
+
 .app:hover {
     background-color: rgba(219, 219, 219, 0.315);
 
+}
+
+@media screen and (max-width:900px) {
+    #app-container {
+        height: auto;
+        width: 50%;
+        left: 50%; /* Adjust left positioning for centering */
+        transform: translateX(-50%); /* Center the container horizontally */
+        justify-content: space-evenly;
+        flex-direction: row;
+        top: 0;
+    }
+    #app-container div{
+        margin-bottom: 5px;
+    }
+    .app{
+        padding: 5px 2.5px;
+    }
+    .app img {
+        width: 34px;
+    }
 }
 
 /* .terminal span {
@@ -207,7 +254,7 @@
     outline: none;
 }
 
-.chrome-options{
+.chrome-options {
     background-color: #1e1e1e;
     width: 100%;
     height: auto;
@@ -220,11 +267,13 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.chrome-options div{
+
+.chrome-options div {
     margin: 0 10px;
     color: var(--color);
 }
-.chrome-options div input{
+
+.chrome-options div input {
     width: 100%;
     height: 30px;
     padding: 5px 10px;
@@ -261,22 +310,25 @@
     width: 100%;
     height: 20px;
 }
-.divider{
+
+.divider {
     width: 100%;
     height: 1px;
     border-radius: 100%;
     margin: 8px 0px;
     background-color: var(--color);
 }
-.options-name, .ShortcutKey{
+
+.options-name,
+.ShortcutKey {
     margin: 4px 10px;
 }
 
-.ShortcutKey{
-    margin-left: 20px ;
+.ShortcutKey {
+    margin-left: 20px;
 }
 
-iframe{
+iframe {
     background-color: var(--color);
 }
 
