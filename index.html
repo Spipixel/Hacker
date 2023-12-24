@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        img {
+            -webkit-user-drag: none;
+            /* Safari */
+            -khtml-user-drag: none;
+            /* Konqueror HTML */
+            -moz-user-drag: none;
+            /* Firefox */
+            -o-user-drag: none;
+            /* Opera */
+            user-drag: none;
+        }
+
+        #selectionBox {
+            position: absolute;
+            border: 1px solid rgba(0, 63, 255, 0.8);
+            background-color: rgba(18, 77, 255, 0.2);
+            pointer-events: none;
+            display: none;
+        }
+
+        .disable-selection {
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="width: 100%;height: 100vh;overflow: hidden;">
+        <main style="position: relative;">
+            <img class="disable-selection" src="img/wp4005877-kali-linux-wallpapers.png" width="100%" height="100%"
+                alt="">
+            <div class="root"
+                style="z-index: 2;top: 0; width: 100%;height: 100%;background-color: transparent;position: absolute;">
+                <div id="app-container"
+                    style=" display: flex; justify-content: space-between; flex-direction: column; background-color: rgba(48, 48, 48, 0.397); border-radius: 10px; z-index: 2; padding: 10px; position: absolute;height: 50%;top: calc(100% - 80%);">
+                    <div class="app disable-selection"
+                        style="margin-bottom: 10px; cursor: pointer; font-size: 0.8em; text-align: center;color: #ffffff;">
+                        <img src="img/icons8-mac-folder-48.png" alt="folder">
+                        <div>Home</div>
+                    </div>
+                    <div onclick="App_openOrClose('block', 'terminal-app')" class="app disable-selection"
+                        style="margin-bottom: 10px; cursor: pointer; font-size: 0.8em; text-align: center;color: #ffffff;">
+                        <img src="img/technology.png" style="border-radius: 3px; margin: 4px;" alt="folder">
+                        <div>terminal</div>
+                    </div>
+                    <div onclick="App_openOrClose('block', 'chrome-app')" class="app disable-selection"
+                        style="margin-bottom: 10px; cursor: pointer; font-size: 0.8em; text-align: center;color: #ffffff;">
+                        <img src="img/chrome.png" width="46px" alt="folder">
+                        <div>Chrome</div>
+                    </div>
+
+                    <div onclick="App_openOrClose('block', 'TextEditor-app')" class="app disable-selection"
+                        style="margin-bottom: 10px; cursor: pointer; font-size: 0.8em; text-align: center;color: #ffffff;">
+                        <img src="img/icons8-document-48.png" width="46px" alt="folder">
+                        <div>Editor</div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="selectionBox" style="position: absolute;top: 0;"></div>
+
+
+            <div id="terminal-app" style="filter: drop-shadow(1px 1px 6px); z-index: 4; display: none;"
+                class="Windows-terminal">
+
+                <div class="terminal-nav">
+                    <div id="terminal-nav" class="main-nav disable-selection"
+                        onmousedown="moveAppOnNavHover('terminal-nav','terminal-app')"
+                        ondblclick="fullScreen('.Windows-terminal', '.terminal')">
+                        <div><img src="img/technology.png" width="20px"></div>
+                        <div id="current-path">Spipixel@kali:~</div>
+                        <div class="options">
+                            <div class="minimize"></div>
+                            <div class="full" onclick="fullScreen('.Windows-terminal','.terminal')"></div>
+                            <div class="close" onclick="App_openOrClose('none', 'terminal-app')"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal">
+                    <div id="history">
+                        <pre>
+ ____________________________________________________________________
+|                                                                    |
+|        //   //        ////       //           //////////////       |
+|        //  //        //  //      //                 //             |
+|        // //        //    //     //                 //             |
+|        ////        //      //    //                 //             |
+|        // //      ////////////   //                 //             |
+|        //  //    //          //  //                 //             |
+|        //   //  //            // ///////////  //////////////       |
+|____________________________________________________________________|
+                        </pre>
+                        Welcome to Kali linux simulator terminal.<br>
+                        This terminal and website is under development. So if you find any bug or glitch then inform us
+                        on github account Spipixel<br><br>
+                    </div>
+
+                    <div class="line">
+                        <span style="color: var(--green-color);" id="path">Spipixel@kali<span
+                                style="color: var(--red-color);">:~</span>&nbsp;</span>
+                        <input autocomplete="off" spellcheck="false" autofocus type="text" id="input">
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="chrome-app" class="chrome-app"
+                style="display: none; transition: 0.1s ease-in-out; filter: drop-shadow(1px 1px 6px); z-index: 4;width: 70%;height: 60vh;z-index: 2; position: absolute;top: 0;left: 91.5px;">
+
+                <div class="chrome-nav">
+                    <div id="chrome-nav" onmousedown="moveAppOnNavHover('chrome-nav','chrome-app')"
+                        class="main-nav disable-selection" ondblclick="fullScreen('.chrome-app' )">
+                        <div><img src="img/chrome.png" width="20px"></div>
+                        <div class="title" style="font-size: 1.2em;">Chrome</div>
+                        <div class="options">
+                            <div class="minimize"></div>
+                            <div class="full" onclick="fullScreen('.chrome-app' )"></div>
+                            <div class="close" onclick="App_openOrClose('none', 'chrome-app')"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chrome-options">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                        </svg>
+                    </div>
+                    <div onclick="chrome_home()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-house" viewBox="0 0 16 16">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+                        </svg>
+                    </div>
+                    <div style="width: 100%;">
+                        <input autocomplete="off" spellcheck="off" type="text" id="URL" onkeydown="Search(event)">
+                    </div>
+                </div>
+                <div style="display: block; border-bottom-left-radius: 10px;border-bottom-right-radius: 10px; background-color: var(--background-color);width: 100%; height: inherit;"
+                    class="chrome-body">
+                    <div style="background-color: rgb(43, 43, 43);width: 100%;height: 100%;display: block;" id="google-body" class="google-body">
+                        <div
+                            style="display: flex;flex-direction: row;align-items: center; justify-content: flex-end;margin-right: 20px;">
+                            <div class="google-options"><a href="https://mail.google.com">Gmail</a></div>
+                            <div class="google-options"><a href="#">Images</a></div>
+                            <div class="google-options">
+                                <div id="dots">
+                                    <svg style="margin-right: -26px;" xmlns="http://www.w3.org/2000/svg" width="26"
+                                        height="26" fill="currentColor" class="bi bi-three-dots-vertical"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                    </svg>
+                                    <svg style="margin-right: -27px;" xmlns="http://www.w3.org/2000/svg" width="26"
+                                        height="26" fill="currentColor" class="bi bi-three-dots-vertical"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                        class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="google-options">
+                                <div>
+                                    <div
+                                        style=" width: 30px;height: 30px;background-color: rgb(97, 247, 110);border-radius: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="google-logo">
+                            <div style="font-family: 'Roboto', sans-serif;">Google</div>
+                        </div>
+                        <div class="search-box-body">
+                            <div class="search-box-container">
+                                <div style="margin-top: 14px; width: 38px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-search" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                    </svg>
+                                </div>
+                                <div class="input-seach">
+                                    <input type="text" autocomplete="off" id="search-query">
+                                </div>
+                                <div style="display: flex;width: 60px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-mic" viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5" />
+                                        <path
+                                            d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        class="bi bi-camera" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z" />
+                                        <path
+                                            d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="TextEditor-app" class="TextEditor-app"
+                style="display: none; filter: drop-shadow(1px 1px 6px); z-index: 4;width:40%; height: 50vh; z-index: 2; position: absolute;top: 10%;left: 140px;">
+                <div class="editor-nav">
+                    <div id="editor-nav" onmousedown="moveAppOnNavHover('editor-nav','TextEditor-app')"
+                        class="main-nav disable-selection" ondblclick="fullScreen('.TextEditor-app' )">
+                        <div><img src="img/icons8-document-48.png" width="20px"></div>
+                        <div class="title" style="font-size: 1.2em;">Text Editor</div>
+                        <div class="options">
+                            <div class="minimize"></div>
+                            <div class="full" onclick="fullScreen('.TextEditor-app')"></div>
+                            <div class="close" onclick="App_openOrClose('none', 'TextEditor-app')"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="editor-menu">
+                    <div>
+                        <button onclick="options_open('file-option', 'dropdown' ,'text-area' )"
+                            class="dropdown-menu-button">File</button>
+                        <div id="file-option" style="display: none;" class="dropdown">
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">New File</div>
+                                <div class="ShortcutKey">Ctrl + N</div>
+                            </div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Open File</div>
+                                <div class="ShortcutKey">Ctrl + O</div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Save</div>
+                                <div class="ShortcutKey">Ctrl + S</div>
+                            </div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Save as</div>
+                                <div class="ShortcutKey">Ctrl + Shift + S</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button onclick="options_open('edit-option', 'dropdown', 'text-area')"
+                            class="dropdown-menu-button">Edit</button>
+                        <div id="edit-option" style="display: none;" class="dropdown">
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Undo</div>
+                                <div class="ShortcutKey">Ctrl + Z</div>
+                            </div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Redo</div>
+                                <div class="ShortcutKey">Ctrl + Y</div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Find</div>
+                                <div class="ShortcutKey">Ctrl + F</div>
+                            </div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Replace</div>
+                                <div class="ShortcutKey">Ctrl + H</div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Cut</div>
+                                <div class="ShortcutKey">Ctrl + X</div>
+                            </div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Copy</div>
+                                <div class="ShortcutKey">Ctrl + C</div>
+                            </div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Past</div>
+                                <div class="ShortcutKey">Ctrl + V</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button onclick="options_open('format-option', 'dropdown', 'text-area')"
+                            class="dropdown-menu-button">Format</button>
+                        <div id="format-option" style="display: none;" class="dropdown">
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">New File</div>
+                                <div class="ShortcutKey">Ctrl + N</div>
+                            </div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Open File</div>
+                                <div class="ShortcutKey">Ctrl + O</div>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Save</div>
+                                <div class="ShortcutKey">Ctrl + S</div>
+                            </div>
+                            <div class="dropdown-menu-list-container">
+                                <div class="options-name">Save as</div>
+                                <div class="ShortcutKey">Ctrl + Shift + S</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="text-area">
+                    <textarea id="textarea"
+                        style="border-bottom-left-radius:10px;border-bottom-right-radius:10px; width: 100%;height: 100%; resize: none;padding: 10px; border: none; outline:none; font-size: 1.2em;"></textarea>
+                </div>
+            </div>
+
+            <div id="alert" style="display: none; z-index: 4; width: 100%;height: 65px;position: absolute;top: 4%;">
+                <div
+                    style="background-color: #ffffff;width: 40%; display: flex;justify-content: space-around; filter: drop-shadow(1px 1px 4px); height: 100%;align-items: center; border-radius: 10px;margin: auto;">
+                    <div style="font-family: 'Roboto';">Use fullscreen mode for better experience</div>
+                    <div> <button onclick="fullScreenMode()"
+                            style="background-color: rgb(68, 68, 212);border-radius: 10px;padding: 10px 15px;cursor: pointer;z-index: 5; color: var(--color);border: none;outline: none;">Fullscreen</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="main.js"></script>
+<script src="terminal.js"></script>
+<script src="app.js"></script>
+<script src="selection.js"></script>
+
+</html>

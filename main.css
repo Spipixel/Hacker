@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+:root {
+    --background-color: #1e1e1e;
+    --Opac-Background: #1e1e1ebe;
+    --green-color: rgb(50, 250, 50);
+    --red-color: rgb(228, 25, 25);
+    --color: #ffffff;
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Hack';
+    src: url("font/Hack-Regular.ttf") format("truetype");
+    src: url("font/Hack-Italic.ttf") format("truetype");
+    src: url("font/Hack-BoldItalic.ttf") format("truetype");
+    src: url("font/Hack-Bold.ttf") format("truetype");
+
+}
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 7px;
+    padding: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #ccc;
+}
+
+.Windows-terminal {
+    height: 70vh;
+    width: 60%;
+    position: absolute;
+    transition: 0.1s ease-in-out;
+    top: 8%;
+    /* opacity: 0.4; */
+    border-radius: 10px;
+    left: 120px;
+    /* background-color: var(--background-color); */
+}
+
+.terminal {
+    background-color: var(--Opac-Background);
+    color: var(--color);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-family: 'Hack';
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.terminal-nav,
+.chrome-nav,
+.editor-nav {
+    background-color: var(--background-color);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 10px;
+}
+
+.main-nav {
+    display: flex;
+    color: var(--color);
+    font-size: 0.7em;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+
+.main-nav .options {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#history a {
+    color: var(--color);
+    text-decoration: none;
+}
+
+#history a:hover {
+    text-decoration: underline;
+}
+
+.line {
+    display: flex;
+    width: 100%;
+}
+
+.app {
+    padding: 10px 5px;
+    border-radius: 3px;
+    transition: 0.1a ease-in-out;
+}
+
+.app:hover {
+    background-color: rgba(219, 219, 219, 0.315);
+
+}
+
+/* .terminal span {
+    } */
+
+.terminal input {
+    font-family: 'Hack';
+    font-size: 16px;
+    width: 60%;
+    border: none;
+    background: transparent;
+    color: var(--color);
+    outline: none;
+}
+
+.google-body {
+    overflow-y: scroll;
+    border-radius: 10px;
+}
+
+.google-options {
+    color: var(--color);
+    margin: 20px 5px;
+}
+
+.google-options a,
+.google-options a:visited,
+.google-options a:active {
+    color: var(--color);
+    text-decoration: none;
+}
+
+.google-options div {
+    padding: 5px;
+    border-radius: 100%;
+}
+
+.google-options a:hover {
+    text-decoration: underline;
+}
+
+.google-options div:hover {
+    background-color: #c0c0c0b0;
+    cursor: pointer;
+}
+
+.google-options #dots {
+    border-radius: 15%;
+}
+
+#google-logo {
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+    width: 100%;
+    font-size: 5em;
+    color: var(--color);
+}
+
+.search-box-body {
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.search-box-container {
+    background-color: transparent;
+    color: #8b8b8b;
+    border: 0.4px solid #8b8b8b;
+    border-radius: 40px;
+    width: 582px;
+    height: 46px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-box-container:hover {
+    background-color: #383a3b;
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.4));
+}
+
+.search-box-container div {
+    width: 100%;
+    margin: 10px;
+}
+
+.search-box-container div svg {
+    margin-right: 4px;
+}
+
+.search-box-container input {
+    width: 100%;
+    color: #ffffff;
+    background-color: transparent;
+    height: 30px;
+    border: none;
+    outline: none;
+}
+
+.chrome-options{
+    background-color: #1e1e1e;
+    width: 100%;
+    height: auto;
+    padding: 5px 10px;
+    display: flex;
+    align-items: baseline;
+}
+
+.chrome-body iframe {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.chrome-options div{
+    margin: 0 10px;
+    color: var(--color);
+}
+.chrome-options div input{
+    width: 100%;
+    height: 30px;
+    padding: 5px 10px;
+    background-color: #383a3b;
+    color: var(--color);
+    outline: none;
+    border: 1px solid #575a5c;
+    border-radius: 50px;
+}
+
+#text-area {
+    width: 100%;
+    height: 100%;
+    background-color: #f0e7e7;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+#output {
+    color: var(--color);
+    font-family: courier;
+    padding: 10px;
+    height: 200px;
+    border: 1px solid #ccc;
+    overflow: auto;
+}
+
+.editor-menu {
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+}
+.divider{
+    width: 100%;
+    height: 1px;
+    border-radius: 100%;
+    margin: 8px 0px;
+    background-color: var(--color);
+}
+.options-name, .ShortcutKey{
+    margin: 4px 10px;
+}
+
+.ShortcutKey{
+    margin-left: 20px ;
+}
+
+iframe{
+    background-color: var(--color);
+}
+
+.dropdown-menu-button {
+    background-color: transparent;
+    color: var(--color);
+    border: none;
+    outline: none;
+    margin: 6px;
+    cursor: pointer;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--background-color);
+    padding: 5px 20px;
+    color: var(--color);
+    font-size: 0.9em;
+    position: absolute;
+    left: 4px;
+    border-radius: 5px;
+}
+
+.dropdown-menu-list-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.close,
+.minimize,
+.full {
+    background-color: #1a1a1a;
+    /* background-color: #2e2e2e; */
+    border: 1px solid #1a1a1a;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+.close:hover {
+    background-color: rgb(219, 1, 1);
+}
+
+.minimize:hover {
+    background-color: rgb(205, 219, 1);
+}
+
+.full:hover {
+    background-color: rgb(63, 219, 1);
+}
+
+.show {
+    animation: 0.1s ease-in-out show;
+}
+
+.hide {
+    animation: 0.1s ease-in-out hide;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes hide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
