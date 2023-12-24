@@ -262,149 +262,53 @@ function searchOnEnter(event) {
 // For URL tob of window
 
 function Search(event) {
+    if (event.keyCode !== 13) {
+        return;
+    }
+
     let base_url_query = document.getElementById('URL');
+    let url = base_url_query.value.replace(/\s/g, ''); // Replace spaces globally
 
-    if (event.keyCode === 13) {
-        if (base_url_query.value.length > 1) {
-            let url = base_url_query.value.replace(/\s/g, ''); // Replace spaces globally
+    if (url.length > 1) {
+        let searchURL = `https://www.bing.com/search?q=${encodeURIComponent(base_url_query.value)}`;
+        let input = document.getElementById('URL');
+        let main_window = document.getElementById('google-body');
+        let frame = document.getElementById('main-frame') || createIframe();
 
-            let searchURL = `https://www.bing.com/search?q=${encodeURIComponent(base_url_query.value)}`;
-            let input = document.getElementById('URL');
+        main_window.style.display = 'none';
 
-            let main_window = document.getElementById('google-body');
-
-            if (main_window.style.display === 'block') {
-
-                main_window.style.display = 'none';
-
-                let frame = document.getElementById('main-frame');
-
-                if (!frame) {
-                    // Create a new iframe element
-                    frame = document.createElement('iframe');
-
-                    // Set the iframe styles
-                    frame.style.width = '100%';
-                    frame.style.height = '100%';
-                    frame.style.border = 'none';
-                    frame.style.outline = 'none';
-
-                    // Set the source attribute of the iframe
-                    frame.setAttribute('id', 'main-frame');
-
-
-                    // Get the element with the class 'chrome-body' (assuming you want to append it there)
-                    let chrome = document.getElementsByClassName('chrome-body')[0];
-                    // Append the iframe to the 'chrome-body' element
-                    chrome.appendChild(frame);
-
-                    if (url.startsWith('https://') || url.startsWith('http://') || url.startsWith('file:///')) {
-                        if (url === 'https://Chrome/NewTab') {
-                            frame.setAttribute('src', '');
-                            frame.contentWindow.location.replace('about:blank');
-                            frame.style.display = 'none';
-                            main_window.style.display = 'block';
-                            input.value = searchURL;
-                            frame.removeAttribute('src');
-                        } else {
-                            // If the URL is an HTTP/HTTPS URL
-                            // Clear the current URL and set the new URL
-                            if (frame.style.display === 'block') {
-                                frame.contentWindow.location.replace('about:blank');
-                                frame.setAttribute('src', url);
-                                input.value = url;
-                            } else {
-                                frame.style.display = 'block';
-                                frame.contentWindow.location.replace('about:blank');
-                                frame.setAttribute('src', url);
-                                input.value = url;
-                            }
-                        }
-                    } else {
-                        // If the URL is not an HTTP/HTTPS URL, perform a Bing search
-                        // Clear the current URL and set the new URL
-                        frame.setAttribute('src', '');
-                        frame.contentWindow.location.replace('about:blank');
-                        frame.setAttribute('src', searchURL);
-                        input.value = searchURL;
-                    }
-
-                } else {
-                    let frame = document.getElementById('main-frame');
-
-                    frame.style.display = 'block';
-                    if (url.startsWith('https://') || url.startsWith('http://') || url.startsWith('file:///')) {
-                        if (url === 'https://Chrome/NewTab') {
-                            frame.contentWindow.location.replace('about:blank');
-                            frame.style.display = 'none';
-                            main_window.style.display = 'block';
-                            input.value = searchURL;
-                            frame.removeAttribute('src');
-                        } else {
-                            // If the URL is an HTTP/HTTPS URL
-                            // Clear the current URL and set the new URL
-                            if (frame.style.display === 'block') {
-                                frame.setAttribute('src', '');
-                                frame.contentWindow.location.replace('about:blank');
-                                frame.setAttribute('src', url);
-                                input.value = url;
-                            } else {
-                                frame.style.display = 'block';
-                                frame.setAttribute('src', '');
-                                frame.contentWindow.location.replace('about:blank');
-                                frame.setAttribute('src', url);
-                                input.value = url;
-                            }
-                        }
-                    } else {
-                        // If the URL is not an HTTP/HTTPS URL, perform a Bing search
-                        // Clear the current URL and set the new URL
-                        frame.setAttribute('src', '');
-                        frame.contentWindow.location.replace('about:blank');
-                        frame.setAttribute('src', searchURL);
-                        input.value = searchURL;
-                    }
-                }
-
-            } else {
-                let frame = document.getElementById('main-frame');
-                if (frame) {
-                    // Clear the current URL and set the new URL
-                    let searchURL = `https://www.bing.com/search?q=${encodeURIComponent(base_url_query.value)}`;
-                    frame.removeAttribute('src');
-                    if (url.startsWith('https://') || url.startsWith('http://') || url.startsWith('file:///')) {
-                        if (url === 'https://Chrome/NewTab') {
-                            frame.contentWindow.location.replace('about:blank');
-                            frame.style.display = 'none';
-                            frame.removeAttribute('src');
-                            frame.contentWindow.location.replace('about:blank');
-                            input.value = searchURL;
-                        } else {
-                            if (frame.style.display === 'block') {
-                                frame.contentWindow.location.replace('about:blank');
-                                frame.setAttribute('src', url);
-                                input.value = url;
-                            } else {
-                                frame.style.display = 'block';
-                                frame.contentWindow.location.replace('about:blank');
-                                frame.setAttribute('src', url);
-                                input.value = url;
-                            }
-                        }
-                    } else {
-                        // If the URL is not an HTTP/HTTPS URL, perform a Bing search
-                        // Clear the current URL and set the new URL
-                        frame.contentWindow.location.replace('about:blank');
-                        frame.setAttribute('src', searchURL);
-                        input.value = searchURL;
-                    }
-                }
+        if (url === 'https://Chrome/NewTab') {
+            input.value = '';
+            frame.contentWindow.location.replace('about:blank');
+            frame.style.display = 'none';
+            main_window.style.display = 'block';
+            input.value = url;
+        } else if (url.startsWith('https://') || url.startsWith('http://') || url.startsWith('file:///')) {
+            if (frame.style.display === 'block') {
+                frame.contentWindow.location.replace('about:blank');
             }
+            frame.setAttribute('src', url);
+            input.value = url;
         } else {
-            return;
+            frame.contentWindow.location.replace('about:blank');
+            frame.setAttribute('src', searchURL);
+            input.value = searchURL;
         }
     }
 }
+
+function createIframe() {
+    let frame = document.createElement('iframe');
+    frame.style.width = '100%';
+    frame.style.height = '100%';
+    frame.style.border = 'none';
+    frame.style.outline = 'none';
+    frame.setAttribute('id', 'main-frame');
+    let chrome = document.getElementsByClassName('chrome-body')[0];
+    chrome.appendChild(frame);
+    return frame;
+}
+
 
 
 
@@ -519,12 +423,14 @@ const options_open = (id, dropdownClassName, appBody) => {
 const chrome_home = () => {
     let frame = document.getElementById('main-frame');
     let body = document.getElementById('google-body');
+    let search_bar = document.getElementById('search-query');
+
+    let bodies = document.getElementsByClassName('google-body');
+    let input = document.getElementById('URL');
 
     if (frame) {
         frame.style.display = 'none';
-
-        let bodies = document.getElementsByClassName('google-body');
-        let input = document.getElementById('URL');
+        frame.remove();
 
         // Loop through all elements with the class 'google-body'
         for (let i = 0; i < bodies.length; i++) {
@@ -534,8 +440,15 @@ const chrome_home = () => {
             body.style.display = 'block';
         }
         input.value = 'https://Chrome/NewTab';
+        search_bar.value = '';
     } else {
-        body.style.display = 'block';
+
+        body.style.display = 'none';
+        setTimeout(() => {
+
+            body.style.display = 'block';
+        }, 100);
+        input.value = 'https://Chrome/NewTab';
     }
 }
 
