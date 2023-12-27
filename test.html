@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch Data from Dummy API</title>
+</head>
+<body>
+
+<div id="data-container"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', fetchData);
+
+function fetchData() {
+  // Replace the URL with your dummy API endpoint
+  const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+
+  // Make a GET request using the fetch API
+  fetch(apiUrl)
+    .then(response => {
+      // Check if the request was successful (status code 200)
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      // Parse the JSON data from the response
+      return response.json();
+    })
+    .then(data => {
+      // Handle the data here
+      displayData(data);
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+}
+
+function displayData(data) {
+  const dataContainer = document.getElementById('data-container');
+
+  // Create an unordered list to display the data
+  const ul = document.createElement('ul');
+
+  // Iterate through the data and create list items
+  data.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.id}: ${item.title}`;
+    ul.appendChild(li);
+  });
+
+  // Append the list to the data container
+  dataContainer.appendChild(ul);
+}
+</script>
+
+</body>
+</html>
